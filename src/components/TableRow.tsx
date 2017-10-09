@@ -1,14 +1,16 @@
 import * as React from 'react';
 
+interface ICoin {
+  price: string,
+  bid: string,
+  ask: string,
+  size: string,
+  time: string,
+  volume: string,
+};
+
 interface ITableProps {
-  coin: {
-    price: string,
-    bid: string,
-    ask: string,
-    size: string,
-    time: string,
-    volume: string,
-  },
+  coin: ICoin,
   name: string,
   onClick: any, // TBD fix to function
 }

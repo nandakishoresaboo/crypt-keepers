@@ -14,8 +14,7 @@ const customStyles = {
 };
 
 interface IAppProps {
-
-}
+};
 
 interface IAppState {
   modalIsOpen: boolean,
@@ -26,6 +25,7 @@ interface IAppState {
 export default class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
+
     this.state = {
       modalIsOpen: true,
       username: '',

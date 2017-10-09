@@ -2,20 +2,19 @@ import * as React from 'react';
 import Overview from './Overview';
 import MyFinances from './MyFinances';
 
-
 interface IPanelProps {
-  handleClick: any, // TBD to func
+  handleClick: (coin: string) => void,
   username: string
-}
+};
 
-// const defaultProps = {
-//   handleClick: () => {},
-//   username: '',
-// };
+interface IPanelState {
+  view: string
+};
 
-class Panel extends React.Component<IPanelProps, any> {
+class Panel extends React.Component<IPanelProps, IPanelState> {
   constructor(props: IPanelProps) {
     super(props);
+
     this.state = {
       view: 'overview',
     };

@@ -5,25 +5,25 @@ import TableRow from './TableRow';
 
 
 interface IOverviewProps {
-  handleClick: any, // TBD to function
+  handleClick: (coin: string) => void,
   className: string
 };
 
-// TBD
-// interface IOverviewState {
-//   BTC: object,
-//   LTC: object,
-//   ETH: object,
-// };
+interface IOverviewState {
+  BTC: any,
+  LTC: any,
+  ETH: any,
+};
 
 // const defaultProps = {
 //   handleClick: e => (e),
 //   className: '',
 // };
 
-class Overview extends React.Component<IOverviewProps, any> {
+class Overview extends React.Component<IOverviewProps, IOverviewState> {
   constructor(props: IOverviewProps) {
     super(props);
+
     this.state = {
       BTC: {},
       LTC: {},

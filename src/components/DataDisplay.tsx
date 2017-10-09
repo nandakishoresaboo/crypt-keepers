@@ -6,10 +6,11 @@ interface IDataDisplayProps {
   activeCoin: string,
 };
 
-
-// const defaultProps = {
-//   activeCoin: 'Bitcoin',
-// };
+interface IDataDisplayState {
+  coinData: Array<any>,
+  range: string,
+  isLoading: boolean,
+};
 
 const coinColor = {
   Bitcoin: '#D3D4D9',
@@ -117,9 +118,10 @@ const renderTimeSeriesData = (coin, coinData) => {
 };
 
 
-class DataDisplay extends React.Component<any, any> {
-  constructor(props: any) {
+class DataDisplay extends React.Component<IDataDisplayProps, IDataDisplayState> {
+  constructor(props: IDataDisplayProps) {
     super(props);
+
     this.state = {
       coinData: [],
       range: '1D',

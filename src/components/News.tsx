@@ -2,9 +2,6 @@ import * as React from 'react';
 import NewsItem from './NewsItem';
 import helpers from '../helpers/api-helpers';
 
-// const propTypes = {
-//   activeCoin: PropTypes.string,
-// };
 
 interface INewsProps {
   activeCoin: string,
@@ -18,9 +15,6 @@ interface INewsState {
   Ethereum: Array<any>,
 };
 
-// const defaultProps = {
-//   activeCoin: 'Bitcoin',
-// };
 
 const parseData = arr => (
   arr.sort((a, b) => {
@@ -40,6 +34,7 @@ const parseData = arr => (
 class News extends React.Component<INewsProps, INewsState> {
   constructor(props: INewsProps) {
     super(props);
+
     this.state = {
       curSelection: 'trending',
       trending: [],
