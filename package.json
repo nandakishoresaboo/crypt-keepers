@@ -16,13 +16,18 @@
     "postinstall": "webpack -p"
   },
   "dependencies": {
+    "@types/d3": "^4.10.1",
+    "@types/prop-types": "^15.5.2",
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
+    "@types/react-modal": "^2.2.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-latest": "^6.24.1",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
-    "d3": "^4.11.0",
+    "d3": "^4.10.1",
     "express": "^4.15.5",
     "gdax": "^0.4.2",
     "jquery": "^3.1.1",
@@ -33,13 +38,14 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-modal": "^2.3.2",
+    "react-modal": "^2.4.1",
     "react-test-renderer": "^16.0.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "webpack": "^3.6.0"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
     "babel-cli": "^6.7.5",
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.0",
@@ -57,7 +63,9 @@
     "eslint-plugin-react": "^7.4.0",
     "jest": "^21.2.1",
     "mocha": "^3.5.3",
-    "supertest": "^3.0.0"
+    "source-map-loader": "^0.2.2",
+    "supertest": "^3.0.0",
+    "typescript": "^2.5.3"
   },
   "babel": {
     "presets": [

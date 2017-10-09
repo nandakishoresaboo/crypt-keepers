@@ -1,21 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import helpers from '../helpers/api-helpers';
 // import OverviewItem from './OverviewItem';
 import TableRow from './TableRow';
 
-const propTypes = {
-  handleClick: PropTypes.func,
-  className: PropTypes.string,
+
+interface IOverviewProps {
+  handleClick: any, // TBD to function
+  className: string
 };
 
-const defaultProps = {
-  handleClick: e => (e),
-  className: '',
-};
+// TBD
+// interface IOverviewState {
+//   BTC: object,
+//   LTC: object,
+//   ETH: object,
+// };
 
-class Overview extends React.Component {
-  constructor(props) {
+// const defaultProps = {
+//   handleClick: e => (e),
+//   className: '',
+// };
+
+class Overview extends React.Component<IOverviewProps, any> {
+  constructor(props: IOverviewProps) {
     super(props);
     this.state = {
       BTC: {},
@@ -80,7 +87,5 @@ class Overview extends React.Component {
   }
 }
 
-Overview.propTypes = propTypes;
-Overview.defaultProps = defaultProps;
 
 export default Overview;

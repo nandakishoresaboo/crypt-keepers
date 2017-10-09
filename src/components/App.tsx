@@ -1,5 +1,5 @@
-import React from 'react';
-import Modal from 'react-modal';
+import * as React from 'react';
+import * as Modal from 'react-modal';
 import DataDisplay from './DataDisplay';
 import Panel from './Panel';
 import News from './News';
@@ -13,8 +13,18 @@ const customStyles = {
   },
 };
 
-export default class App extends React.Component {
-  constructor(props) {
+interface IAppProps {
+
+}
+
+interface IAppState {
+  modalIsOpen: boolean,
+  username: string,
+  activeCoin: string,
+};
+
+export default class App extends React.Component<IAppProps, IAppState> {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       modalIsOpen: true,
@@ -29,7 +39,7 @@ export default class App extends React.Component {
   }
 
   handleSubmit(e) {
-    const node = document.getElementById('username-field');
+    const node: any = document.getElementById('username-field');
     const value = node ? node.value : '';
     this.setState({ username: value });
     e.preventDefault();

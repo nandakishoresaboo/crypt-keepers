@@ -1,20 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import NewsItem from './NewsItem';
 import helpers from '../helpers/api-helpers';
 
-const propTypes = {
-  activeCoin: PropTypes.string,
+// const propTypes = {
+//   activeCoin: PropTypes.string,
+// };
+
+interface INewsProps {
+  activeCoin: string,
 };
 
-const defaultProps = {
-  activeCoin: 'Bitcoin',
+interface INewsState {
+  curSelection: string,
+  trending: Array<any>,
+  Bitcoin: Array<any>,
+  Litecoin: Array<any>,
+  Ethereum: Array<any>,
 };
+
+// const defaultProps = {
+//   activeCoin: 'Bitcoin',
+// };
 
 const parseData = arr => (
   arr.sort((a, b) => {
-    const dateA = new Date(a.created_at);
-    const dateB = new Date(b.created_at);
+    const dateA: any = new Date(a.created_at);
+    const dateB: any = new Date(b.created_at);
     if (dateA - dateB > 0) {
       return -1;
     }
@@ -26,8 +37,8 @@ const parseData = arr => (
 );
 
 
-class News extends React.Component {
-  constructor(props) {
+class News extends React.Component<INewsProps, INewsState> {
+  constructor(props: INewsProps) {
     super(props);
     this.state = {
       curSelection: 'trending',
@@ -79,7 +90,7 @@ class News extends React.Component {
 
   refreshNews() {
     const newsArr = ['trending', 'Bitcoin', 'Litecoin', 'Ethereum'];
-    newsArr.forEach((el) => {
+    newsArr.forEach((el: any) => {
       if (this.state[el].length) {
         if (el === 'trending') {
           helpers.getTrendingNews()
@@ -99,7 +110,7 @@ class News extends React.Component {
   }
 
   handleClick(isTrending) {
-    if (isTrending && !this.state.curSelection !== 'trending') {
+    if (isTrending && !(this.state.curSelection !== 'trending')) {
       this.setState({ curSelection: 'trending' });
     }
     if (!isTrending && this.state.curSelection === 'trending') {
@@ -132,7 +143,5 @@ class News extends React.Component {
   }
 }
 
-News.propTypes = propTypes;
-News.defaultProps = defaultProps;
 
 export default News;

@@ -12,10 +12,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          'awesome-typescript-loader',
         ],
       },
       {
@@ -25,12 +25,27 @@ module.exports = {
           'json-loader',
         ],
       },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        use: [
+          'source-map-loader',
+        ],
+      },
     ],
   },
+  externals: {
+    // react: 'React',
+    // 'react-dom': 'ReactDOM',
+    // 'react-modal': 'Modal',
+    // d3: 'd3',
+    // 'prop-types': 'PropTypes',
+  },
+  devtool: 'source-map',
   resolve: {
     modules: [
       path.join(__dirname, 'node_modules'),
     ],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 };

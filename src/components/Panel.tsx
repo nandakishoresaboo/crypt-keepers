@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import Overview from './Overview';
 import MyFinances from './MyFinances';
 
-const propTypes = {
-  handleClick: PropTypes.func,
-  username: PropTypes.string,
-};
 
-const defaultProps = {
-  handleClick: () => {},
-  username: '',
-};
+interface IPanelProps {
+  handleClick: any, // TBD to func
+  username: string
+}
 
-class Panel extends React.Component {
-  constructor(props) {
+// const defaultProps = {
+//   handleClick: () => {},
+//   username: '',
+// };
+
+class Panel extends React.Component<IPanelProps, any> {
+  constructor(props: IPanelProps) {
     super(props);
     this.state = {
       view: 'overview',
@@ -55,7 +55,5 @@ class Panel extends React.Component {
   }
 }
 
-Panel.propTypes = propTypes;
-Panel.defaultProps = defaultProps;
 
 export default Panel;

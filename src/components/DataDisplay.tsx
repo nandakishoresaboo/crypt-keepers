@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import * as d3 from 'd3';
-import PropTypes from 'prop-types';
 import helpers from '../helpers/api-helpers';
 
-const propTypes = {
-  activeCoin: PropTypes.string,
+interface IDataDisplayProps {
+  activeCoin: string,
 };
 
-const defaultProps = {
-  activeCoin: 'Bitcoin',
-};
+
+// const defaultProps = {
+//   activeCoin: 'Bitcoin',
+// };
 
 const coinColor = {
   Bitcoin: '#D3D4D9',
@@ -29,7 +29,7 @@ const renderTimeSeriesData = (coin, coinData) => {
   const yTicks = 5;
 
   // extract time and close info from data
-  const data = [];
+  const data: Array<any> = [];
   coinData.forEach((row) => {
     data.push({ time: new Date(row[0] * 1000), close: row[4] });
   });
@@ -47,8 +47,8 @@ const renderTimeSeriesData = (coin, coinData) => {
     .range([(height - padding), padding]);
 
   // set x and y domain
-  const xDom = d3.extent(data, d => d.time);
-  const yDom = d3.extent(data, d => d.close);
+  const xDom: Array<any> = d3.extent(data, d => d.time);
+  const yDom: Array<any> = d3.extent(data, d => d.close);
 
   // set x and y axis, use extend to calculate domain
   const xAxis = d3
@@ -60,13 +60,13 @@ const renderTimeSeriesData = (coin, coinData) => {
 
   // generate initial flat line
   const flatLine = d3.line()
-    .x(d => x(d.time))
+    .x((d: any) => x(d.time))
     .y(() => y(yDom[0]));
 
   // generate data line
   const dataLine = d3.line()
-    .x(d => x(d.time))
-    .y(d => y(d.close));
+    .x((d: any) => x(d.time))
+    .y((d: any) => y(d.close));
 
   // APPEND EVERYTHING
   // x-axis with ticks
@@ -85,7 +85,7 @@ const renderTimeSeriesData = (coin, coinData) => {
   svg.append('g')
     .attr('class', 'grid')
     .attr('transform', `translate(0, ${height - padding})`)
-    .call(xAxis.tickSize((2 * padding) - height).tickFormat(''));
+    .call(xAxis.tickSize((2 * padding) - height).tickFormat((aaa:any) => ''));
 
   // y-axis with ticks
   svg.append('g')
@@ -103,7 +103,7 @@ const renderTimeSeriesData = (coin, coinData) => {
   svg.append('g')
     .attr('class', 'grid')
     .attr('transform', `translate(${padding}, 0)`)
-    .call(yAxis.tickSize((2 * padding) - width).tickFormat(''));
+    .call(yAxis.tickSize((2 * padding) - width).tickFormat((aaa:any) => ''));
 
   // animate from flat line to actual y values
   svg.append('path')
@@ -117,8 +117,8 @@ const renderTimeSeriesData = (coin, coinData) => {
 };
 
 
-class DataDisplay extends React.Component {
-  constructor(props) {
+class DataDisplay extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       coinData: [],
@@ -198,7 +198,5 @@ class DataDisplay extends React.Component {
   }
 }
 
-DataDisplay.propTypes = propTypes;
-DataDisplay.defaultProps = defaultProps;
 
 export default DataDisplay;

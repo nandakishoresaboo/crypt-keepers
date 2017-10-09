@@ -1,19 +1,28 @@
-import React from 'react';
+import * as React from 'react';
 import * as d3 from 'd3';
-import PropTypes from 'prop-types';
 import helpers from '../helpers/api-helpers';
 
-const propTypes = {
-  className: PropTypes.string,
-  handleClick: PropTypes.func,
-  username: PropTypes.string,
+
+interface IMyFinancesProps {
+  className: string,
+  handleClick: any, // TBD to function
+  username: string,
+}
+
+interface IMyFinancesState {
+  coin: string,
+  quantity: string,
+  position: object,
+  value: object,
+  sum: number,
+  showAlert: boolean,
 };
 
-const defaultProps = {
-  className: '',
-  handleClick: e => (e),
-  username: '',
-};
+// const defaultProps = {
+//   className: '',
+//   handleClick: e => (e),
+//   username: '',
+// };
 
 const coinName = {
   BTC: 'Bitcoin',
@@ -27,8 +36,8 @@ const coinColor = {
   Litecoin: '#4B88A2',
 };
 
-class MyFinances extends React.Component {
-  constructor(props) {
+class MyFinances extends React.Component<IMyFinancesProps, IMyFinancesState> {
+  constructor(props: IMyFinancesProps) {
     super(props);
     this.state = {
       coin: 'BTC',
@@ -74,13 +83,13 @@ class MyFinances extends React.Component {
           value[coinObj.coin] = (userData.position[coinObj.coin] * coinObj.data.price).toFixed(2);
           sum += userData.position[coinObj.coin] * coinObj.data.price;
         });
-        sum = sum.toFixed(2);
+        // sum = sum.toFixed(2); // as it is getting converted to string
         return this.setState({
           position: userData.position,
           value,
           sum,
         }, () => {
-          if (this.state.sum !== '0.00') {
+          if (this.state.sum !== 0.00) {
             this.renderPieChart(this.state.value);
           }
         });
@@ -98,14 +107,14 @@ class MyFinances extends React.Component {
     const animationPadding = 15;
 
     // process data
-    const data = [];
+    const data: Array<any> = [];
     Object.keys(valueData).forEach((key) => {
       if (valueData[key] !== '0.00') {
-        data.push({ coin: coinName[key], value: valueData[key] });
+        data.push({coin: coinName[key], value: valueData[key] });
       }
     });
 
-    const pie = d3.pie().value(d => d.value);
+    const pie = d3.pie().value((d: any) => d.value);
 
     // append svg
     const svg = d3.select('#pie-chart')
@@ -126,13 +135,13 @@ class MyFinances extends React.Component {
     // append everything
     const g = svg.append('g').attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-    const arc = g.selectAll('.slice')
+    const arc: any = g.selectAll('.slice')
       .data(pie(data))
       .enter()
       .append('g')
-      .attr('class', d => `slice ${d.data.coin}`)
-      .on('click', d => this.props.handleClick(d.data.coin))
-      .on('mouseover', (d) => {
+      .attr('class', (d: any) => `slice ${d.data.coin}`)
+      .on('click', (d: any) => this.props.handleClick(d.data.coin))
+      .on('mouseover', (d: any) => {
         d3.select(`.${d.data.coin}`)
           .transition()
           .duration(500)
@@ -143,7 +152,7 @@ class MyFinances extends React.Component {
             return `translate(${x},${y})`;
           });
       })
-      .on('mouseout', (d) => {
+      .on('mouseout', (d: any) => {
         d3.select(`.${d.data.coin}`)
           .transition()
           .duration(500)
@@ -221,7 +230,5 @@ class MyFinances extends React.Component {
   }
 }
 
-MyFinances.propTypes = propTypes;
-MyFinances.defaultProps = defaultProps;
 
 export default MyFinances;
