@@ -1,5 +1,5 @@
 const models = require('../models');
-const gdax = require('../../helpers/gdax.js');
+const gdax = require('../helpers/gdax.js');
 const db = require('../db/index.js');
 
 module.exports = {
